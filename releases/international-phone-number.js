@@ -76,13 +76,15 @@
           }
           return value.replace(/[^\d]/g, '');
         });
-        ctrl.$validators.internationalPhoneNumber = function(value) {
-          if (!value) {
-            return value;
-          } else {
-            return element.intlTelInput("isValidNumber");
-          }
-        };
+        if (ctrl.$validators) {
+          ctrl.$validators.internationalPhoneNumber = function(value) {
+            if (!value) {
+              return value;
+            } else {
+              return element.intlTelInput("isValidNumber");
+            }
+          };
+        }
         element.on('blur keyup change', function(event) {
           return scope.$apply(read);
         });
